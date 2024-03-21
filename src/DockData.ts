@@ -121,6 +121,13 @@ export interface PanelBase {
    */
   size?: number;
   tabs: TabBase[];
+
+  /**
+   * 移动时使用的大小,而不是默认的50%
+   * TODO 当前只实现了 Panel 水平方向的
+   */
+  movingSize?: number;
+
   /**
    * The id of current tab
    */
@@ -208,6 +215,11 @@ export interface TabData extends TabBase, DockDataBase {
    * @deprecated no longer needed
    */
   cacheContext?: React.Context<any>;
+
+  /**
+   * @default true
+   */
+  clearCache?: boolean,
 }
 
 interface PanelLock {

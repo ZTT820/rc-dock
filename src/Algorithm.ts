@@ -225,7 +225,8 @@ export function dockPanelToPanel(layout: LayoutData, newPanel: PanelData, panel:
         ++pos;
       }
       // HINT: The size remains the same, preventing flex-grow less than 1
-      newPanel.size = panel.size;
+      // 自定义大小优先
+      newPanel.size = newPanel.movingSize ? newPanel.movingSize : panel.size;
       newBox.children.splice(pos, 0, newPanel);
     } else {
       let newChildBox: BoxData = {mode: dockMode, children: []};

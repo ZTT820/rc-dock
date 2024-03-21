@@ -1,13 +1,13 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import {DockContext, DockContextType, TabPaneCache} from "./DockData";
+import {DockContext, DockContextType, TabData, TabPaneCache} from "./DockData";
 import {TabPaneProps} from "rc-tabs";
 
 interface DockTabPaneProps extends TabPaneProps {
 
   cacheId?: string;
   cached: boolean;
-
+  tabData: TabData;
 }
 
 export default class DockTabPane extends React.PureComponent<DockTabPaneProps, any> {
@@ -113,7 +113,9 @@ export default class DockTabPane extends React.PureComponent<DockTabPaneProps, a
 
   componentWillUnmount(): void {
     if (this._cache) {
-      this.context.removeTabCache(this._cache.id, this);
+      // cache 受控, 默认自动清除
+      const { tabData } = this.props;
+      tabData?.clearCache !== false && this.context.removeTabCache(this._cache.id, this);
     }
   }
 }

@@ -102,6 +102,10 @@ export interface PanelBase {
     size?: number;
     tabs: TabBase[];
     /**
+     * 移动时的大小,而不是默认的50%
+     */
+    movingSize?: number;
+    /**
      * The id of current tab
      */
     activeId?: string;

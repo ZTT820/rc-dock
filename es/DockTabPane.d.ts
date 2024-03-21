@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { DockContext, TabPaneCache } from "./DockData";
+import { DockContext, TabData, TabPaneCache } from "./DockData";
 import { TabPaneProps } from "rc-tabs";
 interface DockTabPaneProps extends TabPaneProps {
     cacheId?: string;
     cached: boolean;
+    tabData: TabData;
 }
 export default class DockTabPane extends React.PureComponent<DockTabPaneProps, any> {
     static contextType: React.Context<DockContext>;

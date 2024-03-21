@@ -151,7 +151,7 @@ export class TabCache {
                 React.createElement("div", { className: "dock-tab-close-btn", onClick: this.onCloseClick })
                 : null,
             React.createElement("div", { className: "dock-tab-hit-area", ref: this.getHitAreaRef })));
-        return (React.createElement(DockTabPane, { key: id, cacheId: id, cached: cached, tab: tab }, content));
+        return (React.createElement(DockTabPane, { key: id, cacheId: id, cached: cached, tab: tab, tabData: this.data }, content));
     }
     destroy() {
         // place holder
