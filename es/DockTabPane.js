@@ -66,7 +66,13 @@ export default class DockTabPane extends React.PureComponent {
         if (this._cache) {
             // cache 受控, 默认自动清除
             const { tabData } = this.props;
-            (tabData === null || tabData === void 0 ? void 0 : tabData.clearCache) !== false && this.context.removeTabCache(this._cache.id, this);
+            if ((tabData === null || tabData === void 0 ? void 0 : tabData.clearCache) !== false) {
+                this.context.removeTabCache(this._cache.id, this);
+            }
+            else {
+                // 不清除 cache, 更新 owner
+                this.context.temporaryOwner(this._cache.id, this);
+            }
         }
     }
 }

@@ -237,9 +237,11 @@ export function dockPanelToPanel(layout: LayoutData, newPanel: PanelData, panel:
         newChildBox.children = [newPanel, panel];
       }
       panel.parent = newChildBox;
-      panel.size = 200;
+      // panel.size = 200;
       newPanel.parent = newChildBox;
-      newPanel.size = 200;
+      // newPanel.size = 200;
+      newPanel.size = newPanel.movingSize ? newPanel.movingSize : 200;
+
       newBox.children[pos] = newChildBox;
       newChildBox.parent = newBox;
     }

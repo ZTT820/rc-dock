@@ -404,6 +404,7 @@ export interface DockContext {
 
   /** @ignore */
   removeTabCache(id: string, owner: any): void;
+  temporaryOwner(id: string, owner: any, newOwner?: any): void;
 
   /** @ignore */
   updateTabCache(id: string, portal: React.ReactNode): void;

@@ -165,6 +165,14 @@ class DockPortalManager extends React.PureComponent<LayoutProps, LayoutState> {
       this.forceUpdate();
     }
   }
+
+  temporaryOwner(id: string, owner: any, newOwner: any = "temporary"):void {
+    let cache = this._caches.get(id);
+    if (cache && cache.owner === owner) {
+      cache.owner = newOwner;
+    }
+  }
+
 }
 
 export class DockLayout extends DockPortalManager implements DockContext {

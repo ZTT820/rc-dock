@@ -103,6 +103,7 @@ export interface PanelBase {
     tabs: TabBase[];
     /**
      * 移动时使用的大小,而不是默认的50%
+     * TODO 当前只实现了 Panel 水平方向的
      */
     movingSize?: number;
     /**
@@ -317,6 +318,7 @@ export interface DockContext {
     getTabCache(id: string, owner: any): TabPaneCache;
     /** @ignore */
     removeTabCache(id: string, owner: any): void;
+    temporaryOwner(id: string, owner: any, newOwner?: any): void;
     /** @ignore */
     updateTabCache(id: string, portal: React.ReactNode): void;
     /** @ignore */

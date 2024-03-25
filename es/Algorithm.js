@@ -194,6 +194,7 @@ export function dockPanelToPanel(layout, newPanel, panel, direction) {
                 ++pos;
             }
             // HINT: The size remains the same, preventing flex-grow less than 1
+            // 自定义大小优先
             newPanel.size = newPanel.movingSize ? newPanel.movingSize : panel.size;
             newBox.children.splice(pos, 0, newPanel);
         }
@@ -207,9 +208,10 @@ export function dockPanelToPanel(layout, newPanel, panel, direction) {
                 newChildBox.children = [newPanel, panel];
             }
             panel.parent = newChildBox;
-            panel.size = 200;
+            // panel.size = 200;
             newPanel.parent = newChildBox;
-            newPanel.size = 200;
+            // newPanel.size = 200;
+            newPanel.size = newPanel.movingSize ? newPanel.movingSize : 200;
             newBox.children[pos] = newChildBox;
             newChildBox.parent = newBox;
         }

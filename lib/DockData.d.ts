@@ -102,7 +102,8 @@ export interface PanelBase {
     size?: number;
     tabs: TabBase[];
     /**
-     * 移动时的大小,而不是默认的50%
+     * 移动时使用的大小,而不是默认的50%
+     * TODO 当前只实现了 Panel 水平方向的
      */
     movingSize?: number;
     /**
@@ -180,6 +181,10 @@ export interface TabData extends TabBase, DockDataBase {
      * @deprecated no longer needed
      */
     cacheContext?: React.Context<any>;
+    /**
+     * @default true
+     */
+    clearCache?: boolean;
 }
 interface PanelLock {
     /** override the default style */
@@ -313,6 +318,7 @@ export interface DockContext {
     getTabCache(id: string, owner: any): TabPaneCache;
     /** @ignore */
     removeTabCache(id: string, owner: any): void;
+    temporaryOwner(id: string, owner: any, newOwner?: any): void;
     /** @ignore */
     updateTabCache(id: string, portal: React.ReactNode): void;
     /** @ignore */
