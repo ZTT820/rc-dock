@@ -32,8 +32,18 @@ export class DockPanel extends React.PureComponent<Props, State> {
       if ((parent?.mode === 'float')) {
         r.addEventListener('pointerdown', this.onFloatPointerDown, {capture: true, passive: true});
       }
+      // r.addEventListener('focusin', this.onFocusin, {capture: true, passive: true});
+      // r.addEventListener('focusout', this.onFocusout, {capture: true, passive: true});
+
     }
   };
+
+  // onFocusin = (event?: MouseEvent): any => {
+  //   !(event.currentTarget as any).classList.contains('dock-panel-focus') && (event.currentTarget as any).classList.add('dock-panel-focus');
+  // }
+  // onFocusout = (event?: MouseEvent): any => {
+  //   (event.currentTarget as any).classList.remove('dock-panel-focus');   
+  // }
 
   static _droppingPanel: DockPanel;
   static set droppingPanel(panel: DockPanel) {
@@ -323,13 +333,13 @@ export class DockPanel extends React.PureComponent<Props, State> {
         droppingLayer = <DockDropClass panelData={panelData} panelElement={this._ref} dropFromPanel={dropFromPanel}/>;
       }
     }
-
+    const resizeFlag = isFloat && !(panelLock && panelLock.isResize === false);
     return (
       <DragDropDiv getRef={this.getRef} className={cls} style={style} data-dockid={id}
                    onDragOverT={isFloat ? null : this.onDragOver} onClick={this.onPanelClicked}>
         <DockTabs panelData={panelData} onPanelDragStart={onPanelHeaderDragStart}
                   onPanelDragMove={this.onPanelHeaderDragMove} onPanelDragEnd={this.onPanelHeaderDragEnd}/>
-        {isFloat ?
+        {resizeFlag ?
           [
             <DragDropDiv key="drag-size-t" className="dock-panel-drag-size dock-panel-drag-size-t"
                          onDragStartT={this.onPanelCornerDragT} onDragMoveT={this.onPanelCornerDragMove}
@@ -371,6 +381,8 @@ export class DockPanel extends React.PureComponent<Props, State> {
     }
     if (this._ref) {
       this._ref.removeEventListener('pointerdown', this.onFloatPointerDown, {capture: true});
+      // this._ref.removeEventListener('focusin', this.onFocusin, {capture: true});
+      // this._ref.removeEventListener('focusout', this.onFocusout, {capture: true});
     }
     this._unmounted = true;
   }

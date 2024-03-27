@@ -18,6 +18,8 @@ export class DockPanel extends React.PureComponent {
                 if (((parent === null || parent === void 0 ? void 0 : parent.mode) === 'float')) {
                     r.addEventListener('pointerdown', this.onFloatPointerDown, { capture: true, passive: true });
                 }
+                // r.addEventListener('focusin', this.onFocusin, {capture: true, passive: true});
+                // r.addEventListener('focusout', this.onFocusout, {capture: true, passive: true});
             }
         };
         this.state = { dropFromPanel: null, draggingHeader: false };
@@ -289,9 +291,10 @@ export class DockPanel extends React.PureComponent {
                 droppingLayer = React.createElement(DockDropClass, { panelData: panelData, panelElement: this._ref, dropFromPanel: dropFromPanel });
             }
         }
+        const resizeFlag = isFloat && !(panelLock && panelLock.isResize === false);
         return (React.createElement(DragDropDiv, { getRef: this.getRef, className: cls, style: style, "data-dockid": id, onDragOverT: isFloat ? null : this.onDragOver, onClick: this.onPanelClicked },
             React.createElement(DockTabs, { panelData: panelData, onPanelDragStart: onPanelHeaderDragStart, onPanelDragMove: this.onPanelHeaderDragMove, onPanelDragEnd: this.onPanelHeaderDragEnd }),
-            isFloat ?
+            resizeFlag ?
                 [
                     React.createElement(DragDropDiv, { key: "drag-size-t", className: "dock-panel-drag-size dock-panel-drag-size-t", onDragStartT: this.onPanelCornerDragT, onDragMoveT: this.onPanelCornerDragMove, onDragEndT: this.onPanelCornerDragEnd }),
                     React.createElement(DragDropDiv, { key: "drag-size-b", className: "dock-panel-drag-size dock-panel-drag-size-b", onDragStartT: this.onPanelCornerDragB, onDragMoveT: this.onPanelCornerDragMove, onDragEndT: this.onPanelCornerDragEnd }),
@@ -311,6 +314,8 @@ export class DockPanel extends React.PureComponent {
         }
         if (this._ref) {
             this._ref.removeEventListener('pointerdown', this.onFloatPointerDown, { capture: true });
+            // this._ref.removeEventListener('focusin', this.onFocusin, {capture: true});
+            // this._ref.removeEventListener('focusout', this.onFocusout, {capture: true});
         }
         this._unmounted = true;
     }

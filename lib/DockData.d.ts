@@ -206,6 +206,10 @@ interface PanelLock {
      * override the default flex grow and flex shrink for panel height
      */
     heightFlex?: number;
+    /**
+     * 能否resize
+     */
+    isResize?: boolean;
 }
 /**
  * a panel is a visiaul container with tabs button in the title bar
